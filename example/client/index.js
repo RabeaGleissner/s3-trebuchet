@@ -11,6 +11,6 @@ app.put('/test-multipart-params', s3Catapult.multipartParamsHandler);
 app.put('/test-validate/:fileKey', s3Catapult.fileValidationHandler('fileKey'));
 app.get(
   '/test-get-file/:fileKey',
-  s3Trebuchet.goToTemporaryUrlForFileHandler('fileKey', 'fileName')
+  s3Catapult.goToTemporaryUrlForFileHandler('fileKey', 'fileName')
 );
 app.listen(3000);
