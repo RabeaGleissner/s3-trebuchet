@@ -20,7 +20,7 @@ describe('File upload', () => {
     ];
     await request
       .put('/test-multipart-params')
-      .expect(httpStatusCodes.OK)
+      .expect(200)
       .expect((res) => {
         expect(res.body).to.have.all.keys(expectedKeys);
       });
@@ -43,7 +43,7 @@ describe('File upload', () => {
         headers: { location },
       } = await request.get(`/test-get-file/${fileKey}`).expect(httpStatusCodes.MOVED_TEMPORARILY);
       const res = await superagent(location);
-      expect(res.statusCode).to.equal(httpStatusCodes.OK);
+      expect(res.statusCode).to.equal(200);
     });
 
     it('should 404 for a fileKey that does not exist', async () => {
