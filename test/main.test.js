@@ -111,6 +111,7 @@ describe('File upload', () => {
         await request.put(`/test-validate/${fileKey}`).expect(400);
       });
 
+      // TODO: fix the test description, should say "500" instead of "404"
       it('should return 404 when there is no file', async () => {
         await request.put(`/test-validate/null`).expect(500);
       });
