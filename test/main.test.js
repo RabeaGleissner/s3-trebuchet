@@ -32,7 +32,7 @@ describe('File upload', () => {
       .post(s3Client.getBucketUrl())
       .attach('file', path.join(__dirname, 'test.txt'))
       .field(body);
-    expect(responseStatus).to.equal(httpStatusCodes.CREATED);
+    expect(responseStatus).to.equal(201);
   });
 
   describe('get uploaded file', () => {
@@ -41,7 +41,7 @@ describe('File upload', () => {
       await s3Client.putObject(fileKey, 'Here is the body of the file!');
       const {
         headers: { location },
-      } = await request.get(`/test-get-file/${fileKey}`).expect(httpStatusCodes.MOVED_TEMPORARILY);
+      } = await request.get(`/test-get-file/${fileKey}`).expect(302);
       const res = await superagent(location);
       expect(res.statusCode).to.equal(200);
     });
@@ -51,7 +51,7 @@ describe('File upload', () => {
         headers: { location },
       } = await request.get(`/test-get-file/null`).expect(httpStatusCodes.MOVED_TEMPORARILY);
       return superagent(location).catch(({ response: { statusCode } }) =>
-        expect(statusCode).to.equal(httpStatusCodes.NOT_FOUND)
+        expect(statusCode).to.equal(404)
       );
     });
 
