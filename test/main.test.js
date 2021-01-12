@@ -55,6 +55,17 @@ describe('File upload', () => {
       );
     });
 
+    it('should 404 for another non existing fileKey', async () => {
+      const {
+        headers: { location },
+      } = await request
+        .get(`/test-get-file/i-do-not-exist`)
+        .expect(httpStatusCodes.MOVED_TEMPORARILY);
+      return superagent(location).catch(({ response: { statusCode } }) =>
+        expect(statusCode).to.equal(httpStatusCodes.NOT_FOUND)
+      );
+    });
+
     it('should add the attachment file name if specified', async () => {
       const fileKey = `upload-test-${uuid()}`;
       const response = await request
