@@ -7,8 +7,8 @@ import '../fake-s3';
 const app = express();
 const s3Catapult = initS3Trebuchet(s3rverConfiguration);
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'client.html')));
-app.put('/test-multipart-params', s3Trebuchet.multipartParamsHandler);
-app.put('/test-validate/:fileKey', s3Trebuchet.fileValidationHandler('fileKey'));
+app.put('/test-multipart-params', s3Catapult.multipartParamsHandler);
+app.put('/test-validate/:fileKey', s3Catapult.fileValidationHandler('fileKey'));
 app.get(
   '/test-get-file/:fileKey',
   s3Trebuchet.goToTemporaryUrlForFileHandler('fileKey', 'fileName')
