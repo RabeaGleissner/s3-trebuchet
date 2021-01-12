@@ -26,13 +26,13 @@ describe('File upload', () => {
       });
   });
 
-  it('should be able to upload a file with the generated policy', async () => {
+  it('should upload a file with the generated policy', async () => {
     const { body } = await request.put('/test-multipart-params');
-    const res = await superagent
+    const { status: responseStatus } = await superagent
       .post(s3Client.getBucketUrl())
       .attach('file', path.join(__dirname, 'test.txt'))
       .field(body);
-    expect(res.status).to.equal(httpStatusCodes.CREATED);
+    expect(responseStatus).to.equal(httpStatusCodes.CREATED);
   });
 
   describe('get uploaded file', () => {
@@ -46,7 +46,7 @@ describe('File upload', () => {
       expect(res.statusCode).to.equal(httpStatusCodes.OK);
     });
 
-    it('should 404 for a non existing fileKey', async () => {
+    it('should 404 for a fileKey that does not exist', async () => {
       const {
         headers: { location },
       } = await request.get(`/test-get-file/null`).expect(httpStatusCodes.MOVED_TEMPORARILY);
