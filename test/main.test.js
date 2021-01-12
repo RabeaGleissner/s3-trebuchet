@@ -95,12 +95,12 @@ describe('File upload', () => {
         await s3Client.deleteObject(fileKey);
       });
 
-      it('should throw 400 when a file has no content', async () => {
+      it('should throw an error when a file has no content', async () => {
         await s3Client.putObject(fileKey, '');
         await request.put(`/test-validate/${fileKey}`).expect(400);
       });
 
-      it('should return 404 when there is no file', async () => {
+      it('should throw an error when there is no file', async () => {
         await request.put(`/test-validate/null`).expect(500);
       });
     });
