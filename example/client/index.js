@@ -8,6 +8,7 @@ const app = express();
 const s3Trebuchet = initS3Trebuchet(s3rverConfiguration);
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'client.html')));
 app.put('/test-multipart-params', s3Trebuchet.multipartParamsHandler);
+// HELLO!!!
 app.put('/test-validate/:fileKey', s3Trebuchet.fileValidationHandler('fileKey'));
 app.get(
   '/test-get-file/:fileKey',
