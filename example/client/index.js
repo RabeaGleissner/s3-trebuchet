@@ -1,5 +1,5 @@
 import express from 'express'; // eslint-disable-line import/no-extraneous-dependencies
-import path from 'path';
+import path from 'path'; // follow the path
 import initS3Trebuchet from '../../lib';
 import s3rverConfiguration from '../config';
 import '../fake-s3';
