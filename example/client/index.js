@@ -2,7 +2,7 @@ import express from 'express'; // eslint-disable-line import/no-extraneous-depen
 import path from 'path';
 import initS3Trebuchet from '../../lib';
 import s3rverConfiguration from '../config';
-import '../fake-s3';
+import '../fake-s3'; // some notes
 
 const app = express();
 const s3Trebuchet = initS3Trebuchet(s3rverConfiguration);
